@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simple WebVR</title>
+  <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+  <script>
+    AFRAME.registerComponent('change-color', {
+      init: function () {
+        const el = this.el;
+        el.addEventListener('click', function () {
+          const current = el.getAttribute('color');
+          el.setAttribute('color', current === '#E74C3C' ? '#3498DB' : '#E74C3C');
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+  <a-scene background="color: #D9F0FF">
+    <a-plane position="0 0 -4" rotation="-90 0 0" width="20" height="20" color="#83B87A"></a-plane>
+    <a-box position="-1 1 -4" rotation="0 25 0" width="1.5" height="1.5" depth="1.5" color="#E74C3C" change-color class="clickable"></a-box>
+    <a-sphere position="1.5 1.3 -5" radius="1" color="#F4C542"></a-sphere>
+    <a-cylinder position="3 0.75 -4" radius="0.5" height="1.5" color="#8E6BBE"></a-cylinder>
+    <a-light type="ambient" intensity="0.7"></a-light>
+    <a-light type="directional" position="-1 4 2" intensity="0.8"></a-light>
+    <a-entity position="0 1.6 0">
+      <a-camera>
+        <a-cursor raycaster="objects: .clickable" fuse="false" color="#222222"></a-cursor>
+      </a-camera>
+    </a-entity>
+  </a-scene>
+</body>
+</html>
